@@ -37,6 +37,7 @@ public class Driver {
 					case 4 -> SQL.add_student(conn, scan);
 					case 5 -> SQL.delete_student(conn, scan);
 					case 6 -> SQL.register_course(conn, scan);
+					case 7 -> SQL.check_registration(conn, scan);
 					case 0 -> {
 						System.out.println("The Session has been ended, Thank you!");
 						keepGoing = false;
@@ -69,6 +70,7 @@ public class Driver {
 		System.out.println("4. Add a student");
 		System.out.println("5. Delete a student");
 		System.out.println("6. Register a course");
+		System.out.println("7. Check for registration");
 
 		System.out.println("0. Quit ");
 		System.out.println();

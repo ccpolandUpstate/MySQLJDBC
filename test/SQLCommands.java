@@ -232,7 +232,66 @@ public class SQLCommands {
 		st.close();
 		rs.close();
 	}
-	
+	public void check_registration(Connection conn, Scanner keyboard) throws SQLException, IOException {
+		// Registered(ssn, code, year, semester, grade) , exclude grade in this case.
+		// Show course code + year + semester
+		Statement st = conn.createStatement();
+		System.out.println("Check Registration");
+		System.out.println("Enter student's SSN");
+		String studentSSN = keyboard.nextLine();
+
+		String query = "SELECT ssn from registered where ssn = '" + studentSSN + "'";
+		try {
+
+			ResultSet rs = st.executeQuery(query);
+			while (rs.next()) { // While the SSN is found... List course code + year + semester
+				String code = rs.getString("code");
+				String year = rs.getString("year");
+				String semester = rs.getString("semester");
+				System.out.println(
+						"Code: " + code
+								+ " Year: " + year
+								+ " Semester: " + semester
+								+ " ");
+			}
+			rs.close();
+			st.close();
+		}
+		catch (SQLException e) {
+			System.out.println("Message: " + e.getMessage());
+			}
+		}
+
+	public void upload_grades(Connection conn, Scanner keyboard) throws SQLException, IOException {
+		// Supply code, year, semester.. Prompt a letter grade for each registered student
+		Statement st = conn.createStatement();
+		System.out.println("Upload Grades");
+		System.out.println("Please enter course code: ");
+		String courseCode = keyboard.nextLine();
+		System.out.println("Please enter course year: ");
+		String courseYear = keyboard.nextLine();
+		System.out.println("Please enter course semester: ");
+		String courseSemester = keyboard.nextLine();
+
+		String query = "SELECT * from registered where code = '" + courseCode + "'" +
+				"AND year = '" + courseYear + "'" +
+				"AND semester = '" + courseSemester + "'";
+		ResultSet rs = st.executeQuery(query);
+		while(rs.next()) {
+			String studentSSN = rs.getString("ssn");
+			System.out.println("Enter course grade for: " + studentSSN + "");
+			String courseGrade = keyboard.nextLine();
+			try {
+
+			}
+			catch (SQLException e) {
+				System.out.println("Message " + e.getMessage());
+			}
+		}
+
+	}
+
+
 	public void show_courses(Connection conn) throws SQLException, IOException
 	{
 		try
