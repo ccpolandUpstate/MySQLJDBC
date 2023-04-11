@@ -53,27 +53,27 @@ public class Driver {
   }
     public static void printmenu()
     {
-    		System.out.println();
-    		System.out.println("*********************************************************************");
-	      	System.out.println("");
-	      	System.out.println("***                                                               ***");
-	      	System.out.println("");
-	      	System.out.println("***              Welcome to Online Registration System            ***");
-	      	System.out.println("");
-	      	System.out.println("***                                                               ***");
-	      	System.out.println("");
-	      	System.out.println("*********************************************************************");
-	      	System.out.println("1. Add a course");
-		    System.out.println("2. Delete a course");
-	      	System.out.println("3. Show all course");
-			System.out.println("4. Add a student");
-			System.out.println("5. Delete a student");
-			System.out.println("6. Register a course");
+		System.out.println();
+		System.out.println("*********************************************************************");
+		System.out.println("");
+		System.out.println("***                                                               ***");
+		System.out.println("");
+		System.out.println("***              Welcome to Online Registration System            ***");
+		System.out.println("");
+		System.out.println("***                                                               ***");
+		System.out.println("");
+		System.out.println("*********************************************************************");
+		System.out.println("1. Add a course");
+		System.out.println("2. Delete a course");
+		System.out.println("3. Show all course");
+		System.out.println("4. Add a student");
+		System.out.println("5. Delete a student");
+		System.out.println("6. Register a course");
 
-	      	System.out.println("0. Quit ");
-	      	System.out.println();
-	      	
-	      	System.out.println("Please choose an option");
+		System.out.println("0. Quit ");
+		System.out.println();
+
+		System.out.println("Please choose an option");
     }
 }
 
