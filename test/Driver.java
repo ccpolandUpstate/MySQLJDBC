@@ -24,26 +24,25 @@ public class Driver {
 			int command;
 			String input;
 	        boolean keepGoing = true;
-	        while (keepGoing == true)
+	        while (keepGoing)
 	        {
 	            printmenu();
 	            input = scan.nextLine();
 	            command = Integer.parseInt(input);
-				
-				switch(command)
-				{
-					case 1: SQL.add_course(conn, scan); break;
-					case 2: SQL.delete_course(conn, scan); break;
-					case 3: SQL.show_courses(conn); break;
-					case 4: SQL.add_student(conn, scan); break;
-					case 5: SQL.delete_student(conn, scan); break;
-					case 6: SQL.register_course(conn, scan); break;
-					case 0: 
+
+				switch (command) {
+					case 1 -> SQL.add_course(conn, scan);
+					case 2 -> SQL.delete_course(conn, scan);
+					case 3 -> SQL.show_courses(conn);
+					case 4 -> SQL.add_student(conn, scan);
+					case 5 -> SQL.delete_student(conn, scan);
+					case 6 -> SQL.register_course(conn, scan);
+					case 0 -> {
 						System.out.println("The Session has been ended, Thank you!");
-	               	    keepGoing = false;
-	               	    conn.close(); //close database connection   
-						break;
-				}    		            			
+						keepGoing = false;
+						conn.close(); //close database connection
+					}
+				}
 		    }
 		}
 		catch (SQLException ex)
