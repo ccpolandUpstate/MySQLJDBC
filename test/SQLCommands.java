@@ -47,7 +47,6 @@ public class SQLCommands {
 		System.out.println("Delete a course");
 		System.out.println("Please enter the course code");
 		String courseCode = keyboard.nextLine().toUpperCase().trim();
-		//System.out.println("Are you sure you wish to delete " + courseDelete);
 		String query = "select code from Course Where code = '" + courseCode + "'";
 		ResultSet rs = st.executeQuery(query);
 		if (rs.next()) {
