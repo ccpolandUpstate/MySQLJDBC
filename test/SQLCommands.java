@@ -307,7 +307,8 @@ public class SQLCommands {
 					"AND code = '" + courseCode + "'" +
 					"AND year = '" + courseYear + "'" +
 					"AND semester = '" + courseSemester + "'";
-			try { // Sends query to DB
+			try {
+				// Sends query to DB
 				st.execute(query);
 			}
 			catch (SQLException e) {
