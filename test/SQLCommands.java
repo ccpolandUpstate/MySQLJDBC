@@ -94,7 +94,7 @@ public class SQLCommands {
 			System.out.println("A Student already exists with that SSN");
 			return;
 		}
-		else { // If SSN doesnt exist.. Add Student
+		else { // If SSN doesn't exist… Add Student
 			query = "INSERT INTO Student (ssn, name, address, major) values ('" + SSN + "', '" + studentName + "', '" + studentAddress + "', '" + studentMajor + "')";
 			try{
 				st.execute(query);
@@ -144,7 +144,7 @@ public class SQLCommands {
 		Statement st = conn.createStatement();
 		String query = "select code from Registered Where code = '" + courseCode + "'";
 		ResultSet rs = st.executeQuery(query);
-		// These statements work mostly for deleteing the course..
+		// These statements work mostly for deleting the course..
 		if(rs.next()) {
 			query = "DELETE FROM registered Where Code = '" + courseCode + "'";
 			try {
@@ -177,7 +177,7 @@ public class SQLCommands {
 			System.out.println("Student has been removed from all registered courses.");
 		}
 		else {
-			System.out.println("Student wasnt registered for any courses.");
+			System.out.println("Student wasn't registered for any courses.");
 			return;
 		}
 		rs.close();
@@ -198,16 +198,16 @@ public class SQLCommands {
 		System.out.println("Which semester? (Spring / Fall");
 		String semester = keyboard.nextLine();
 
-		// Must check if SSN exists.. Then must check there is no duplicate registration for year/semester.
+		// Must check if SSN exists… Then must check there is no duplicate registration for year/semester.
 		String query = "SELECT ssn from student where ssn = '" + studentSSN + "'";
 		ResultSet rs = st.executeQuery(query);
-		if(rs.next()) { // If the SSN does exist... Check that that SSN doesnt have the same course code for inputted year & semester.
+		if(rs.next()) { // If the SSN does exist... Check that that SSN doesn't have the same course code for inputted year & semester.
 			query = "SELECT ssn from registered where ssn = '" + studentSSN + "'" +
 					"AND code = '" + courseCode + "'" +
 					"AND year = '" + schoolYear + "'" +
 					"AND semester = '" + semester + "'";
 			rs = st.executeQuery(query);
-			if(rs.next()) { // IF it does contain all of these.. Then tell them that they cannot register for that course twice.
+			if(rs.next()) { // IF it does contain all of these… Then tell them that they cannot register for that course twice.
 				System.out.println("Unable to register for course.");
 				System.out.println("Student already registered for given year & semester.");
 				return;
@@ -301,7 +301,8 @@ public class SQLCommands {
 					"AND semester = '" + courseSemester + "'";
 			try { // Sends query to DB
 				st.execute(query);
-			} catch (SQLException e) {
+			}
+			catch (SQLException e) {
 				System.out.println("Message: " + e.getMessage());
 			}
 		}
