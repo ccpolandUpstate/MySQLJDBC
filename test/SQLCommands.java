@@ -325,7 +325,7 @@ public class SQLCommands {
 			catch (SQLException e) {
 				System.out.println("Message: " + e.getMessage());
 			}
-		}
+		}//
 		System.out.println("Grades have been uploaded.");
 		st.close();
 		rs.close();

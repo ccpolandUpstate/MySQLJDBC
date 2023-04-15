@@ -24,7 +24,7 @@ public class Driver {
 			int command;
 			String input;
 	        boolean keepGoing = true;
-	        while (keepGoing)
+	        while (keepGoing)//
 	        {
 	            printmenu();
 	            input = scan.nextLine();
