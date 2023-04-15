@@ -2,6 +2,7 @@ package test.test;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SQLCommands {
@@ -263,8 +264,11 @@ public class SQLCommands {
 		}
 
 	public void upload_grades(Connection conn, Scanner keyboard) throws SQLException, IOException {
-		// Supply code, year, semester.. Prompt a letter grade for each registered student
+		// Supply code, year, semester..
+		// Prompt for every student in the course
 		Statement st = conn.createStatement();
+		ArrayList<String> listOfSSN = new ArrayList<String>();
+
 		System.out.println("Upload Grades");
 		System.out.println("Please enter course code: ");
 		String courseCode = keyboard.nextLine();
@@ -277,12 +281,20 @@ public class SQLCommands {
 				"AND year = '" + courseYear + "'" +
 				"AND semester = '" + courseSemester + "'";
 		ResultSet rs = st.executeQuery(query);
-
 			try {
 				while(rs.next()) {
 					String studentSSN = rs.getString("ssn");
-					System.out.println("Enter course grade for: " + studentSSN + "");
-					String courseGrade = keyboard.nextLine();
+					listOfSSN.add(studentSSN);
+				}
+				for(int i = 0; i < listOfSSN.size(); i++) {
+					System.out.println("Please enter the letter grade for: " + listOfSSN.get(i));
+					String studentGrade = keyboard.next();
+					query = "INSERT INTO registered(grade) values
+					query = "SELECT * from registered where code = '" + courseCode + "'" +
+							"AND year = '" + courseYear + "'" +
+							"AND semester = '" + courseSemester + "'" +
+							"AND ssn = '" + listOfSSN.get(i) + "'";
+					st.execute(query);
 				}
 			}
 			catch (SQLException e) {
