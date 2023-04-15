@@ -263,38 +263,14 @@ public class SQLCommands {
 			}
 		}
 
-//	public void upload_grades(Connection conn, Scanner keyboard) throws SQLException, IOException {
-//		// Supply code, year, semester..
-//		// Prompt for every student in the course
-//		Statement st = conn.createStatement();
-//		ArrayList<String> listOfSSN = new ArrayList<String>();
-//
-//		System.out.println("Upload Grades");
-//		System.out.println("Please enter course code: ");
-//		String courseCode = keyboard.nextLine();
-//		System.out.println("Please enter course year: ");
-//		String courseYear = keyboard.nextLine();
-//		System.out.println("Please enter course semester: ");
-//		String courseSemester = keyboard.nextLine();
-//
-//		String query = "SELECT * from registered where code = '" + courseCode + "'" +
-//				"AND year = '" + courseYear + "'" +
-//				"AND semester = '" + courseSemester + "'";
-//		ResultSet rs = st.executeQuery(query);
-//
-//		catch (SQLException e) {
-//			System.out.println("Message " + e.getMessage());
-//		}
-//		st.close();
-//		rs.close();
-//	}
-
-	// Create an upload grades method that takes in a connection, and a scanner.
 	public void upload_grades(Connection conn, Scanner keyboard) throws SQLException, IOException {
-		// Supply code, year, semester..
+		// Registered(ssn, code, year, semester, grade)
+		// User Supplies code, year, semester
 		// Prompt for every student in the course
 		Statement st = conn.createStatement();
-		ArrayList<String> listOfSSN = new ArrayList<String>();
+
+		// List to store every ssn within the course
+		ArrayList<String> listOfSSN = new ArrayList<>();
 
 		System.out.println("Upload Grades");
 		System.out.println("Please enter course code: ");
@@ -308,24 +284,27 @@ public class SQLCommands {
 				"AND year = '" + courseYear + "'" +
 				"AND semester = '" + courseSemester + "'";
 		ResultSet rs = st.executeQuery(query);
+
+		// If student found within course... append ssn to list.
 		while (rs.next()) {
 			String ssn = rs.getString("ssn");
 			listOfSSN.add(ssn);
 		}
-		for (int i = 0; i < listOfSSN.size(); i++) {
-			System.out.println("Enter grade for student with SSN: " + listOfSSN.get(i));
+		// Loop that iterates through every student found within the course
+		// Updates their grade based on user inputted value char(1)
+		for (String ssnStudent : listOfSSN) {
+			System.out.println("Enter a letter grade for student with SSN: " + ssnStudent);
 			String grade = keyboard.nextLine();
-			query = "UPDATE registered SET grade = '" + grade + "' WHERE ssn = '" + listOfSSN.get(i) + "'" +
+			query = "UPDATE registered SET grade = '" + grade + "' WHERE ssn = '" + ssnStudent + "'" +
 					"AND code = '" + courseCode + "'" +
 					"AND year = '" + courseYear + "'" +
 					"AND semester = '" + courseSemester + "'";
-			try {
+			try { // Sends query to DB
 				st.execute(query);
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				System.out.println("Message: " + e.getMessage());
 			}
-		}//
+		}
 		System.out.println("Grades have been uploaded.");
 		st.close();
 		rs.close();
