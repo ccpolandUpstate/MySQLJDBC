@@ -72,6 +72,7 @@ public class Driver {
 		System.out.println("5. Delete a student");
 		System.out.println("6. Register a course");
 		System.out.println("7. Check for registration");
+		System.out.println("8. Upload grades");
 
 		System.out.println("0. Quit ");
 		System.out.println();
