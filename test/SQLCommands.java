@@ -289,7 +289,7 @@ public class SQLCommands {
 				for(int i = 0; i < listOfSSN.size(); i++) {
 					System.out.println("Please enter the letter grade for: " + listOfSSN.get(i));
 					String studentGrade = keyboard.next();
-					query = "INSERT INTO registered(grade) values
+					query = "INSERT INTO registered(grade) values(
 					query = "SELECT * from registered where code = '" + courseCode + "'" +
 							"AND year = '" + courseYear + "'" +
 							"AND semester = '" + courseSemester + "'" +
