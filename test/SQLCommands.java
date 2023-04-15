@@ -277,19 +277,18 @@ public class SQLCommands {
 				"AND year = '" + courseYear + "'" +
 				"AND semester = '" + courseSemester + "'";
 		ResultSet rs = st.executeQuery(query);
-		while(rs.next()) {
-			String studentSSN = rs.getString("ssn");
-			System.out.println("Enter course grade for: " + studentSSN + "");
-			String courseGrade = keyboard.nextLine();
-			try {
 
+			try {
+				while(rs.next()) {
+					String studentSSN = rs.getString("ssn");
+					System.out.println("Enter course grade for: " + studentSSN + "");
+					String courseGrade = keyboard.nextLine();
+				}
 			}
 			catch (SQLException e) {
 				System.out.println("Message " + e.getMessage());
 			}
 		}
-
-	}
 
 
 	public void show_courses(Connection conn) throws SQLException, IOException

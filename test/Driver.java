@@ -38,6 +38,7 @@ public class Driver {
 					case 5 -> SQL.delete_student(conn, scan);
 					case 6 -> SQL.register_course(conn, scan);
 					case 7 -> SQL.check_registration(conn, scan);
+					case 8 -> SQL.upload_grades(conn, scan);
 					case 0 -> {
 						System.out.println("The Session has been ended, Thank you!");
 						keepGoing = false;
