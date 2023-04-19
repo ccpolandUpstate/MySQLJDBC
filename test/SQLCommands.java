@@ -78,8 +78,7 @@ public class SQLCommands {
 		// Student(ssn, name, address, major)
 		System.out.println("Add a student");
 		System.out.println("Enter their SSN: ");
-		int SSN = keyboard.nextInt();
-		keyboard.nextLine(); // Clears int -> String
+		int SSN = Integer.parseInt(keyboard.nextLine());
 		System.out.println("Enter their name: ");
 		String studentName = keyboard.nextLine();
 		System.out.println("Enter their address: ");
@@ -112,8 +111,7 @@ public class SQLCommands {
 
 		System.out.println("Delete Student");
 		System.out.println("Enter the student's SSN");
-		int studentSSN = keyboard.nextInt();
-		keyboard.nextLine(); // Clears int -> String..
+		int studentSSN = Integer.parseInt(keyboard.nextLine());
 		String query = "SELECT ssn from Student WHERE ssn = '" + studentSSN + "'";
 		ResultSet rs = st.executeQuery(query);
 		if(rs.next()) { // If a student with that SSN exists, delete it
@@ -197,9 +195,10 @@ public class SQLCommands {
 		System.out.println("Enter the course code: ");
 		String courseCode = keyboard.nextLine();
 		System.out.println("Which school year?");
-		String schoolYear = keyboard.nextLine();
+		int schoolYear = Integer.parseInt(keyboard.nextLine().trim());
 		System.out.println("Which semester? (Spring / Fall");
 		String semester = keyboard.nextLine();
+		semester = semester.substring(0,1).toUpperCase() + semester.substring(1).toLowerCase();
 
 		// Must check if SSN exists… Then must check there is no duplicate registration for year/semester.
 		String query = "SELECT ssn from student where ssn = '" + studentSSN + "'";
@@ -248,7 +247,7 @@ public class SQLCommands {
 		System.out.println("Enter student's SSN");
 		String studentSSN = keyboard.nextLine();
 
-		String query = "SELECT ssn from registered where ssn = '" + studentSSN + "'";
+		String query = "SELECT * from registered where ssn = '" + studentSSN + "'";
 		try {
 
 			ResultSet rs = st.executeQuery(query);
@@ -256,7 +255,7 @@ public class SQLCommands {
 				// While the SSN is found...
 				// List course code + year + semester
 				String code = rs.getString("code");
-				String year = rs.getString("year");
+				int year = Integer.parseInt(rs.getString("year"));
 				String semester = rs.getString("semester");
 				System.out.println(
 						"Code: " + code
@@ -278,15 +277,16 @@ public class SQLCommands {
 		Statement st = conn.createStatement();
 
 		// List to store every ssn within the course
-		ArrayList<String> listOfSSN = new ArrayList<>();
+		ArrayList<String> listOfSSN = new ArrayList<>(); // Technically should be <Integer> list
 
 		System.out.println("Upload Grades");
 		System.out.println("Please enter course code: ");
 		String courseCode = keyboard.nextLine();
 		System.out.println("Please enter course year: ");
-		String courseYear = keyboard.nextLine();
+		int courseYear = Integer.parseInt(keyboard.nextLine().trim());
 		System.out.println("Please enter course semester: ");
 		String courseSemester = keyboard.nextLine();
+		courseSemester = courseSemester.substring(0,1).toUpperCase() + courseSemester.substring(1).toLowerCase();
 
 		String query = "SELECT * from registered where code = '" + courseCode + "'" +
 				"AND year = '" + courseYear + "'" +
@@ -303,6 +303,10 @@ public class SQLCommands {
 		for (String ssnStudent : listOfSSN) {
 			System.out.println("Enter a letter grade for student with SSN: " + ssnStudent);
 			String grade = keyboard.nextLine();
+			if(grade.length() > 1) {
+				System.out.println("Invalid Grade Input");
+				return;
+			}
 			query = "UPDATE registered SET grade = '" + grade + "' WHERE ssn = '" + ssnStudent + "'" +
 					"AND code = '" + courseCode + "'" +
 					"AND year = '" + courseYear + "'" +
